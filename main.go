@@ -8,9 +8,11 @@ import (
 	"unsafe"
 )
 
-const SCREEN_WIDTH = 1600
-const SCREEN_HEIGHT = 1600
-const SQUARE_SIZE = 40.0
+const (
+	SCREEN_WIDTH  = 1600
+	SCREEN_HEIGHT = 1600
+	SQUARE_SIZE   = 40.0
+)
 
 var (
 	grid_x    = int(SCREEN_WIDTH / SQUARE_SIZE)
