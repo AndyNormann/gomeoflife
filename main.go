@@ -29,14 +29,6 @@ func main() {
 		next_grid[i] = make([]bool, grid_y)
 	}
 
-	c := func(x, y int) int {
-		var ret_val int
-		if x >= 0 && x < grid_x && y >= 0 && y < grid_y && grid[x][y] {
-			ret_val = 1
-		}
-		return ret_val
-	}
-
 	// GLFW init
 	err := glfw.Init()
 	if err != nil {
@@ -79,9 +71,9 @@ func main() {
 			for i := 0; i < grid_x; i++ {
 				for j := 0; j < grid_y; j++ {
 					neighbours :=
-						c(i-1, j-1) + c(i, j-1) + c(i+1, j-1) +
-							c(i-1, j) + c(i+1, j) +
-							c(i-1, j+1) + c(i, j+1) + c(i+1, j+1)
+						check(i-1, j-1) + check(i, j-1) + check(i+1, j-1) +
+							check(i-1, j) + check(i+1, j) +
+							check(i-1, j+1) + check(i, j+1) + check(i+1, j+1)
 
 					next_grid[i][j] =
 						(grid[i][j] && (neighbours == 2 || neighbours == 3)) ||
@@ -98,6 +90,7 @@ func main() {
 
 			draw(window)
 
+			// Resets opengl context if the context is lost
 			if glfw.GetCurrentContext() == nil {
 				window.MakeContextCurrent()
 			}
@@ -105,6 +98,16 @@ func main() {
 		}
 		glfw.PollEvents()
 	}
+}
+
+// Returns 1 if coordinate is in bounds and alive,
+// returns 0 if coordinate is out of bounds or dead
+func check(x, y int) int {
+	var ret_val int
+	if x >= 0 && x < grid_x && y >= 0 && y < grid_y && grid[x][y] {
+		ret_val = 1
+	}
+	return ret_val
 }
 
 func draw(w *glfw.Window) {
