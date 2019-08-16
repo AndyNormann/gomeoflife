@@ -36,7 +36,7 @@ func main() {
 	}
 	defer glfw.Terminate()
 
-	window, err := glfw.CreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "SFML", nil, nil)
+	window, err := glfw.CreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Gome Of Life", nil, nil)
 	if err != nil {
 		log.Fatalln(err)
 	}
